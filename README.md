@@ -1,126 +1,143 @@
-# first-lambda
+# AWS lambda projects using SAM CLI
 
-This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
+## Pre-Requisite
+1. AWS CLI
+2. AWS SAM CLI
+3. JDK
 
-- HelloWorldFunction/src/main - Code for the application's Lambda function.
-- events - Invocation events that you can use to invoke the function.
-- HelloWorldFunction/src/test - Unit tests for the application code.
-- template.yaml - A template that defines the application's AWS resources.
-
-The application uses several AWS resources, including Lambda functions and an API Gateway API. These resources are defined in the `template.yaml` file in this project. You can update the template to add AWS resources through the same deployment process that updates your application code.
-
-If you prefer to use an integrated development environment (IDE) to build and test your application, you can use the AWS Toolkit.  
-The AWS Toolkit is an open source plug-in for popular IDEs that uses the SAM CLI to build and deploy serverless applications on AWS. The AWS Toolkit also adds a simplified step-through debugging experience for Lambda function code. See the following links to get started.
-
-* [CLion](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [GoLand](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [IntelliJ](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [WebStorm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [Rider](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [PhpStorm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [PyCharm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [RubyMine](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [DataGrip](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [VS Code](https://docs.aws.amazon.com/toolkit-for-vscode/latest/userguide/welcome.html)
-* [Visual Studio](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/welcome.html)
-
-## Deploy the sample application
-
-The Serverless Application Model Command Line Interface (SAM CLI) is an extension of the AWS CLI that adds functionality for building and testing Lambda applications. It uses Docker to run your functions in an Amazon Linux environment that matches Lambda. It can also emulate your application's build environment and API.
-
-To use the SAM CLI, you need the following tools.
-
-* SAM CLI - [Install the SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
-* java17 - [Install the Java 17](https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/downloads-list.html)
-* Docker - [Install Docker community edition](https://hub.docker.com/search/?type=edition&offering=community)
-
-To build and deploy your application for the first time, run the following in your shell:
-
+Open up terminal and follow below steps
+1. Change directory where project needs to be created or create and change directory to created DIR
+    ```bash
+    mkdir sam-lambda-handson
+    cd sam-lambda-handson
+    ```
+2. Execute **sam init** command to initialize project, further choose the option for setting up runtime and respective options as needed
+    ```bash
+    sam init
+    ```
+3. Once project is created follow README.md for next step or execute below command
 ```bash
-sam build
-sam deploy --guided
+sam build # to build project
+sam deploy # to deploy project
+# sam local invoke <lambda name> --event <event.json file for testing, could be found within event/>
+# example
+sam local invoke HelloWorldFunction --event events/event.json
 ```
+local invoke command would require to have docker installed and running cause it will need to download lambda runtime image for running lambda functions locally.
+-- -
+#### SAMPLE INPUT AND OUTPUT OF THE ABOVE COMMANDS
 
-The first command will build the source of your application. The second command will package and deploy your application to AWS, with a series of prompts:
-
-* **Stack Name**: The name of the stack to deploy to CloudFormation. This should be unique to your account and region, and a good starting point would be something matching your project name.
-* **AWS Region**: The AWS region you want to deploy your app to.
-* **Confirm changes before deploy**: If set to yes, any change sets will be shown to you before execution for manual review. If set to no, the AWS SAM CLI will automatically deploy application changes.
-* **Allow SAM CLI IAM role creation**: Many AWS SAM templates, including this example, create AWS IAM roles required for the AWS Lambda function(s) included to access AWS services. By default, these are scoped down to minimum required permissions. To deploy an AWS CloudFormation stack which creates or modifies IAM roles, the `CAPABILITY_IAM` value for `capabilities` must be provided. If permission isn't provided through this prompt, to deploy this example you must explicitly pass `--capabilities CAPABILITY_IAM` to the `sam deploy` command.
-* **Save arguments to samconfig.toml**: If set to yes, your choices will be saved to a configuration file inside the project, so that in the future you can just re-run `sam deploy` without parameters to deploy changes to your application.
-
-You can find your API Gateway Endpoint URL in the output values displayed after deployment.
-
-## Use the SAM CLI to build and test locally
-
-Build your application with the `sam build` command.
-
-```bash
-first-lambda$ sam build
 ```
+user@Zs-Mac aws-learning % mkdir sam-lambda-handson
+user@Zs-Mac aws-learning % cd sam-lambda-handson 
+user@Zs-Mac sam-lambda-handson % ls
+user@Zs-Mac sam-lambda-handson % sam init
 
-The SAM CLI installs dependencies defined in `HelloWorldFunction/build.gradle`, creates a deployment package, and saves it in the `.aws-sam/build` folder.
+You can preselect a particular runtime or package type when using the `sam init` experience.
+Call `sam init --help` to learn more.
 
-Test a single function by invoking it directly with a test event. An event is a JSON document that represents the input that the function receives from the event source. Test events are included in the `events` folder in this project.
+Which template source would you like to use?
+	1 - AWS Quick Start Templates
+	2 - Custom Template Location
+Choice: 1
 
-Run functions locally and invoke them with the `sam local invoke` command.
+Choose an AWS Quick Start application template
+	1 - Hello World Example
+	2 - Data processing
+	3 - Hello World Example with Powertools for AWS Lambda
+	4 - Multi-step workflow
+	5 - Scheduled task
+	6 - Standalone function
+	7 - Serverless API
+	8 - Infrastructure event management
+	9 - Lambda Response Streaming
+	10 - Serverless Connector Hello World Example
+	11 - Multi-step workflow with Connectors
+	12 - GraphQLApi Hello World Example
+	13 - Full Stack
+	14 - Lambda EFS example
+	15 - Hello World Example With Powertools for AWS Lambda
+	16 - DynamoDB Example
+	17 - Machine Learning
+Template: 1
 
-```bash
-first-lambda$ sam local invoke HelloWorldFunction --event events/event.json
+Use the most popular runtime and package type? (Python and zip) [y/N]: N
+
+Which runtime would you like to use?
+	1 - aot.dotnet7 (provided.al2)
+	2 - dotnet6
+	3 - go1.x
+	4 - go (provided.al2)
+	5 - graalvm.java11 (provided.al2)
+	6 - graalvm.java17 (provided.al2)
+	7 - java17
+	8 - java11
+	9 - java8.al2
+	10 - java8
+	11 - nodejs18.x
+	12 - nodejs16.x
+	13 - nodejs14.x
+	14 - python3.9
+	15 - python3.8
+	16 - python3.7
+	17 - python3.11
+	18 - python3.10
+	19 - ruby3.2
+	20 - ruby2.7
+	21 - rust (provided.al2)
+Runtime: 7 
+Error: '7 ' is not one of '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21'.
+Runtime: 7
+
+What package type would you like to use?
+	1 - Zip
+	2 - Image
+Package type: 1
+
+Which dependency manager would you like to use?
+	1 - gradle
+	2 - maven
+Dependency manager: 1
+
+Would you like to enable X-Ray tracing on the function(s) in your application?  [y/N]: N
+
+Would you like to enable monitoring using CloudWatch Application Insights?
+For more info, please view https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-application-insights.html [y/N]: y
+AppInsights monitoring may incur additional cost. View https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/appinsights-what-is.html#appinsights-pricing for more details
+
+Project name [sam-app]: sam-test-lambda
+
+    -----------------------
+    Generating application:
+    -----------------------
+    Name: sam-test-lambda
+    Runtime: java17
+    Architectures: x86_64
+    Dependency Manager: gradle
+    Application Template: hello-world
+    Output Directory: .
+    Configuration file: sam-test-lambda/samconfig.toml
+    
+    Next steps can be found in the README file at sam-test-lambda/README.md
+        
+
+Commands you can use next
+=========================
+[*] Create pipeline: cd sam-test-lambda && sam pipeline init --bootstrap
+[*] Validate SAM template: cd sam-test-lambda && sam validate
+[*] Test Function in the Cloud: cd sam-test-lambda && sam sync --stack-name {stack-name} --watch
+
+user@Zs-Mac sam-lambda-handson % ls
+sam-test-lambda
+user@Zs-Mac sam-lambda-handson % cd sam-test-lambda 
+user@Zs-Mac sam-test-lambda % ls
+HelloWorldFunction	README.md		events			samconfig.toml		template.yaml
+user@Zs-Mac sam-test-lambda % ls -ll
+total 32
+drwxr-xr-x  7 user  staff   224 Oct 18 01:41 HelloWorldFunction
+-rw-r--r--  1 user  staff  8153 Oct 18 01:41 README.md
+drwxr-xr-x  3 user  staff    96 Oct 18 01:41 events
+-rw-r--r--  1 user  staff   687 Oct 18 01:41 samconfig.toml
+-rw-r--r--  1 user  staff  2337 Oct 18 01:41 template.yaml
+user@Zs-Mac sam-test-lambda % 
 ```
-
-The SAM CLI can also emulate your application's API. Use the `sam local start-api` to run the API locally on port 3000.
-
-```bash
-first-lambda$ sam local start-api
-first-lambda$ curl http://localhost:3000/
-```
-
-The SAM CLI reads the application template to determine the API's routes and the functions that they invoke. The `Events` property on each function's definition includes the route and method for each path.
-
-```yaml
-      Events:
-        HelloWorld:
-          Type: Api
-          Properties:
-            Path: /hello
-            Method: get
-```
-
-## Add a resource to your application
-The application template uses AWS Serverless Application Model (AWS SAM) to define application resources. AWS SAM is an extension of AWS CloudFormation with a simpler syntax for configuring common serverless application resources such as functions, triggers, and APIs. For resources not included in [the SAM specification](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md), you can use standard [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html) resource types.
-
-## Fetch, tail, and filter Lambda function logs
-
-To simplify troubleshooting, SAM CLI has a command called `sam logs`. `sam logs` lets you fetch logs generated by your deployed Lambda function from the command line. In addition to printing the logs on the terminal, this command has several nifty features to help you quickly find the bug.
-
-`NOTE`: This command works for all AWS Lambda functions; not just the ones you deploy using SAM.
-
-```bash
-first-lambda$ sam logs -n HelloWorldFunction --stack-name first-lambda --tail
-```
-
-You can find more information and examples about filtering Lambda function logs in the [SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
-
-## Unit tests
-
-Tests are defined in the `HelloWorldFunction/src/test` folder in this project.
-
-```bash
-first-lambda$ cd HelloWorldFunction
-HelloWorldFunction$ gradle test
-```
-
-## Cleanup
-
-To delete the sample application that you created, use the AWS CLI. Assuming you used your project name for the stack name, you can run the following:
-
-```bash
-sam delete --stack-name first-lambda
-```
-
-## Resources
-
-See the [AWS SAM developer guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) for an introduction to SAM specification, the SAM CLI, and serverless application concepts.
-
-Next, you can use AWS Serverless Application Repository to deploy ready to use Apps that go beyond hello world samples and learn how authors developed their applications: [AWS Serverless Application Repository main page](https://aws.amazon.com/serverless/serverlessrepo/)

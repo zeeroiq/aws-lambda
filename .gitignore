@@ -1,4 +1,1 @@
-/.aws-sam/
-/.idea/
-/HelloWorldFunction/.gradle/
-/HelloWorldFunction/src/main/.aws-sam/
+.idea
