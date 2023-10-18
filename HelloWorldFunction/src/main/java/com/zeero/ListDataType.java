@@ -2,10 +2,7 @@ package com.zeero;
 
 import com.google.gson.GsonBuilder;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.reflect.Modifier.TRANSIENT;
@@ -33,5 +30,24 @@ public class ListDataType {
                 .create()
                 .toJson(nameAndScoreMap);
         System.out.println(parsedName2ScoreMap);
+    }
+
+    public Map<String, List<Integer>> getStudentScores() {
+
+        Map<String, List<Integer>> student2scoreMap = new HashMap<>();
+        student2scoreMap.put("AB", Arrays.asList(70, 80, 90));
+        student2scoreMap.put("BC", Arrays.asList(70, 85, 90));
+        student2scoreMap.put("CD", Arrays.asList(70, 80, 95));
+        student2scoreMap.put("DE", Arrays.asList(75, 80, 90));
+
+
+        String parsedName2ScoreMap = new GsonBuilder()
+                .excludeFieldsWithModifiers(TRANSIENT)
+                .excludeFieldsWithoutExposeAnnotation()
+                .setPrettyPrinting()
+                .create()
+                .toJson(student2scoreMap);
+        System.out.println("Student 2 Score map :\n" + parsedName2ScoreMap);
+        return student2scoreMap;
     }
 }

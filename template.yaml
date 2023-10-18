@@ -17,7 +17,8 @@ Resources:
     Properties:
       CodeUri: HelloWorldFunction
       # Handler: com.zeero.ListDataType::getSampleScore
-      Handler: com.zeero.ListDataType::addStudentsAndScores
+      # Handler: com.zeero.ListDataType::addStudentsAndScores
+      Handler: com.zeero.ListDataType::getStudentScores
       Runtime: java17
       Architectures:
         - arm64
