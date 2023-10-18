@@ -1,6 +1,8 @@
 package com.zeero;
 
 import com.google.gson.GsonBuilder;
+import com.zeero.pojo.Patient;
+import com.zeero.pojo.TestsData;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -49,5 +51,15 @@ public class ListDataType {
                 .toJson(student2scoreMap);
         System.out.println("Student 2 Score map :\n" + parsedName2ScoreMap);
         return student2scoreMap;
+    }
+
+    public TestsData getPatientTestsData(Patient patient) {
+        System.out.println("Patient Details: \n" + patient);
+
+        TestsData testsData = new TestsData();
+        testsData.setBp("80/120");
+        testsData.setHeartRate("190 tpm");
+
+        return testsData;
     }
 }
