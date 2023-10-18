@@ -4,6 +4,9 @@ import com.google.gson.GsonBuilder;
 import com.zeero.pojo.Patient;
 import com.zeero.pojo.TestsData;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -61,5 +64,12 @@ public class ListDataType {
         testsData.setHeartRate("190 tpm");
 
         return testsData;
+    }
+
+    public void testOutputStream(InputStream input, OutputStream output) throws IOException {
+        int data;
+        while ((data = input.read()) != -1) {
+            output.write(Character.toLowerCase(data));
+        }
     }
 }

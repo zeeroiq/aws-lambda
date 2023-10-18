@@ -19,7 +19,8 @@ Resources:
       # Handler: com.zeero.ListDataType::getSampleScore
       # Handler: com.zeero.ListDataType::addStudentsAndScores
       # Handler: com.zeero.ListDataType::getStudentScores
-      Handler: com.zeero.ListDataType::getPatientTestsData
+      # Handler: com.zeero.ListDataType::getPatientTestsData
+      Handler: com.zeero.ListDataType::testOutputStream
       Runtime: java17
       Architectures:
         - arm64
