@@ -1,10 +1,14 @@
 package com.zeero;
 
+import com.google.gson.GsonBuilder;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static java.lang.reflect.Modifier.TRANSIENT;
 
 public class ListDataType {
 
@@ -19,5 +23,15 @@ public class ListDataType {
                 .parallelStream()
                 .map(studentScores::get)
                 .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public void addStudentsAndScores(Map<String, Integer> nameAndScoreMap) {
+        String parsedName2ScoreMap = new GsonBuilder()
+                .excludeFieldsWithModifiers(TRANSIENT)
+                .excludeFieldsWithoutExposeAnnotation()
+                .setPrettyPrinting()
+                .create()
+                .toJson(nameAndScoreMap);
+        System.out.println(parsedName2ScoreMap);
     }
 }
