@@ -6,10 +6,10 @@ Description: >
   Sample SAM Template for first-lambda
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
-#Globals:
-#  Function:
-#    Timeout: 20
-#    MemorySize: 512
+Globals:
+  Function:
+    Timeout: 6
+    # MemorySize: 512
 
 Resources:
   TestLambdaConfigsFunction:
@@ -21,16 +21,16 @@ Resources:
       # Handler: com.zeero.ListDataType::getStudentScores
       # Handler: com.zeero.ListDataType::getPatientTestsData
       # Handler: com.zeero.DataTypesExample::testOutputStream
-      Handler: com.zeero.TimeOuts::getStudentScores
+      # Handler: com.zeero.TimeOuts::getStudentScores
+      Handler: com.zeero.LambdaProperties::readSystemProperties
       Runtime: java17
       Architectures:
         - arm64
 #        - x86_64
       MemorySize: 512
-      Timeout: 6
-#      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
-#        Variables:
-#          PARAM1: VALUE
+      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+        Variables:
+          lambda_env_info: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
 #      Events:
 #        HelloWorld:
 #          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api

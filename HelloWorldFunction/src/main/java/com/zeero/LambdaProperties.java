@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TimeOuts {
+public class LambdaProperties {
     public Map<String, List<Integer>> getStudentScores(Context context) throws InterruptedException {
         Thread.sleep(5000);
 
@@ -23,6 +23,11 @@ public class TimeOuts {
         String parsedName2ScoreMap = DataTypesExample.gson.toJson(student2scoreMap);
         context.getLogger().log("Student 2 Score map :\n" + parsedName2ScoreMap + "\n");
         return student2scoreMap;
+    }
+    public String readSystemProperties(Context context) throws InterruptedException {
+        String lambdaEnvInfo = System.getenv("lambda_env_info");
+        context.getLogger().log("Env property read from lambda prior to return - " + lambdaEnvInfo);
+        return lambdaEnvInfo;
     }
 
 }
