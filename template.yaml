@@ -12,7 +12,7 @@ Description: >
 #    MemorySize: 512
 
 Resources:
-  TestParameterAndReturnTypesFunction:
+  TestLambdaConfigsFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: HelloWorldFunction
@@ -20,12 +20,14 @@ Resources:
       # Handler: com.zeero.ListDataType::addStudentsAndScores
       # Handler: com.zeero.ListDataType::getStudentScores
       # Handler: com.zeero.ListDataType::getPatientTestsData
-      Handler: com.zeero.DataTypesExample::testOutputStream
+      # Handler: com.zeero.DataTypesExample::testOutputStream
+      Handler: com.zeero.TimeOuts::getStudentScores
       Runtime: java17
       Architectures:
         - arm64
 #        - x86_64
       MemorySize: 512
+      Timeout: 6
 #      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
 #        Variables:
 #          PARAM1: VALUE

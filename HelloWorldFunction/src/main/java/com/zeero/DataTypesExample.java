@@ -16,7 +16,7 @@ import static java.lang.reflect.Modifier.TRANSIENT;
 
 public class DataTypesExample {
 
-    Gson gson = new GsonBuilder()
+    public static Gson gson = new GsonBuilder()
             .excludeFieldsWithModifiers(TRANSIENT)
             .excludeFieldsWithoutExposeAnnotation()
             .setPrettyPrinting()
